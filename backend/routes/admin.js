@@ -12,23 +12,27 @@ router.post("/seed", async (req, res) => {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  await Promise.all([
-    Document.deleteMany({}),
-    University.deleteMany({}),
-    Discipline.deleteMany({}),
-  ]);
+  try {
+    await Promise.all([
+      Document.deleteMany({}),
+      University.deleteMany({}),
+      Discipline.deleteMany({}),
+    ]);
 
-  await Document.insertMany(documents);
-  await University.insertMany(universities);
-  await Discipline.insertMany(disciplines);
+    await Document.insertMany(documents);
+    await University.insertMany(universities);
+    await Discipline.insertMany(disciplines);
 
-  res.json({
-    seeded: {
-      documents: documents.length,
-      universities: universities.length,
-      disciplines: disciplines.length,
-    },
-  });
+    res.json({
+      seeded: {
+        documents: documents.length,
+        universities: universities.length,
+        disciplines: disciplines.length,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Seed failed", detail: err.message });
+  }
 });
 
 export default router;
