@@ -10,6 +10,8 @@ import adminRouter from "./routes/admin.js";
 import Document from "./models/Document.js";
 import University from "./models/University.js";
 import Discipline from "./models/Discipline.js";
+import Repository from "./models/Repository.js";
+import HarvestLog from "./models/HarvestLog.js";
 
 const app = express();
 
@@ -51,7 +53,13 @@ async function start() {
         console.error("Could not drop stale text index:", dropErr.message);
       }
     }
-    await Promise.all([Document.syncIndexes(), University.syncIndexes(), Discipline.syncIndexes()]);
+    await Promise.all([
+      Document.syncIndexes(),
+      University.syncIndexes(),
+      Discipline.syncIndexes(),
+      Repository.syncIndexes(),
+      HarvestLog.syncIndexes(),
+    ]);
     console.log("Indexes synced");
   } catch (err) {
     console.error("Failed to connect to MongoDB:", err.message);
