@@ -6,6 +6,7 @@ import documentsRouter from "./routes/documents.js";
 import universitiesRouter from "./routes/universities.js";
 import disciplinesRouter from "./routes/disciplines.js";
 import ctaRouter from "./routes/cta.js";
+import adminRouter from "./routes/admin.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/documents", documentsRouter);
 app.use("/api/universities", universitiesRouter);
 app.use("/api/disciplines", disciplinesRouter);
 app.use("/api/cta", ctaRouter);
+app.use("/api/admin", adminRouter);
 
 app.use((req, res) => {
   res.status(404).json({ error: "Not found" });
