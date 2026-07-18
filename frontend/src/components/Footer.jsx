@@ -51,7 +51,7 @@ export default function Footer() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: "var(--space-2)" }}>
               <li><a href="https://risethibrida.com" target="_blank" rel="noopener" className="text-muted">ResearchOS</a></li>
               <li><Link to="/partnership" className="text-muted">Jadi Mitra Repository</Link></li>
-              <li><a href="mailto:hello@risethibrida.com" className="text-muted">Kontak</a></li>
+              <li><a href="mailto:scholars@visualis.id" className="text-muted">Kontak</a></li>
             </ul>
           </div>
 

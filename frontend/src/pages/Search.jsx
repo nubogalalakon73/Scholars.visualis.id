@@ -18,10 +18,13 @@ export default function Search() {
   const [language, setLanguage] = useState("");
   const [sort, setSort] = useState("relevance");
   const [view, setView] = useState("list");
+  const [page, setPage] = useState(1);
 
   const [universities, setUniversities] = useState([]);
   const [disciplines, setDisciplines] = useState([]);
   const [docs, setDocs] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [resultCount, setResultCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,12 +38,20 @@ export default function Search() {
   }, []);
 
   useEffect(() => {
+    setPage(1);
+  }, [q, degrees, selectedUnis, disciplineId, language, sort]);
+
+  useEffect(() => {
     setLoading(true);
-    fetchDocuments({ q, degree: degrees, universityId: selectedUnis, disciplineId, language, sort })
-      .then((res) => setDocs(res.results))
+    fetchDocuments({ q, degree: degrees, universityId: selectedUnis, disciplineId, language, sort, page, limit: 10 })
+      .then((res) => {
+        setDocs(res.results);
+        setTotalPages(res.totalPages || 1);
+        setResultCount(res.count || 0);
+      })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }, [q, degrees, selectedUnis, disciplineId, language, sort]);
+  }, [q, degrees, selectedUnis, disciplineId, language, sort, page]);
 
   function toggle(list, setList, value) {
     setList(list.includes(value) ? list.filter((v) => v !== value) : [...list, value]);
@@ -55,7 +66,6 @@ export default function Search() {
     setSort("relevance");
   }
 
-  const resultCount = docs.length;
   const withCta = useMemo(() => {
     const items = docs.map((d) => ({ type: "doc", doc: d }));
     if (items.length > 2) items.splice(2, 0, { type: "cta" });
@@ -209,6 +219,36 @@ export default function Search() {
                 )
               )}
             </div>
+
+            {totalPages > 1 && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "var(--space-3)",
+                  marginTop: "var(--space-6)",
+                }}
+              >
+                <button
+                  className="btn btn-ghost"
+                  disabled={page <= 1}
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                >
+                  ← Sebelumnya
+                </button>
+                <span className="text-muted" style={{ fontSize: "0.9rem" }}>
+                  Halaman {page} dari {totalPages}
+                </span>
+                <button
+                  className="btn btn-ghost"
+                  disabled={page >= totalPages}
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                >
+                  Selanjutnya →
+                </button>
+              </div>
+            )}
           </section>
 
           <aside className="card" style={{ position: "sticky", top: 90 }}>

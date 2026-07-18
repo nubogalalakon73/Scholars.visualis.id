@@ -9,13 +9,6 @@ import { fetchDisciplines, fetchUniversities, fetchDocuments } from "../api/clie
 
 const POPULAR_KEYWORDS = ["Kecerdasan Buatan", "Stunting", "Energi Terbarukan", "Fintech", "Arsitektur Hijau"];
 
-const STATS = [
-  { label: "Dokumen Terindeks", value: "2.4 Juta+" },
-  { label: "Universitas Terintegrasi", value: "180+" },
-  { label: "Disiplin Ilmu", value: "42" },
-  { label: "Mitra Repository", value: "95" },
-];
-
 export default function Home() {
   const navigate = useNavigate();
   const [q, setQ] = useState("");
@@ -99,17 +92,6 @@ export default function Home() {
         </section>
 
         {error && <p style={{ color: "crimson" }}>Gagal memuat data: {error}</p>}
-
-        <section className="band band-1">
-          <div className="grid grid-4" style={{ gridTemplateColumns: "repeat(4, 1fr)", textAlign: "center" }}>
-            {STATS.map((s) => (
-              <div key={s.label}>
-                <div style={{ fontSize: "2rem", fontWeight: 700, color: "var(--color-accent)" }}>{s.value}</div>
-                <div className="text-muted">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         <section className="section">
           <h2>Temukan Berdasarkan Disiplin</h2>

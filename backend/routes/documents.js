@@ -6,7 +6,7 @@ const router = Router();
 // GET /api/documents?q=&degree=&universityId=&disciplineId=&language=&sort=
 router.get("/", async (req, res, next) => {
   try {
-    const { q, degree, universityId, disciplineId, language, sort } = req.query;
+    const { q, degree, universityId, disciplineId, language, sort, page, limit } = req.query;
     const filter = {};
 
     if (degree) {
@@ -50,8 +50,25 @@ router.get("/", async (req, res, next) => {
         break;
     }
 
-    const results = await Document.find(filter).sort(sortSpec).lean();
-    res.json({ count: results.length, results });
+    const pageNum = Math.max(1, parseInt(page, 10) || 1);
+    const pageSize = Math.min(50, Math.max(1, parseInt(limit, 10) || 10));
+
+    const [count, results] = await Promise.all([
+      Document.countDocuments(filter),
+      Document.find(filter)
+        .sort(sortSpec)
+        .skip((pageNum - 1) * pageSize)
+        .limit(pageSize)
+        .lean(),
+    ]);
+
+    res.json({
+      count,
+      page: pageNum,
+      pageSize,
+      totalPages: Math.max(1, Math.ceil(count / pageSize)),
+      results,
+    });
   } catch (err) {
     next(err);
   }
