@@ -7,6 +7,9 @@ import universitiesRouter from "./routes/universities.js";
 import disciplinesRouter from "./routes/disciplines.js";
 import ctaRouter from "./routes/cta.js";
 import adminRouter from "./routes/admin.js";
+import Document from "./models/Document.js";
+import University from "./models/University.js";
+import Discipline from "./models/Discipline.js";
 
 const app = express();
 
@@ -40,6 +43,8 @@ async function start() {
   try {
     await connectDB(process.env.MONGODB_URI);
     console.log("Connected to MongoDB");
+    await Promise.all([Document.syncIndexes(), University.syncIndexes(), Discipline.syncIndexes()]);
+    console.log("Indexes synced");
   } catch (err) {
     console.error("Failed to connect to MongoDB:", err.message);
     console.error("Server will continue running; requests requiring DB will fail until MONGODB_URI is reachable.");

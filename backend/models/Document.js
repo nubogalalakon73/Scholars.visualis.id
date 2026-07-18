@@ -21,6 +21,9 @@ const documentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-documentSchema.index({ title: "text", authors: "text", keywords: "text", university: "text" });
+documentSchema.index(
+  { title: "text", authors: "text", keywords: "text", university: "text" },
+  { language_override: "textIndexLanguage" }
+);
 
 export default mongoose.model("Document", documentSchema);
