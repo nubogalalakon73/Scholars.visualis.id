@@ -43,6 +43,14 @@ async function start() {
   try {
     await connectDB(process.env.MONGODB_URI);
     console.log("Connected to MongoDB");
+    try {
+      await Document.collection.dropIndex("title_text_authors_text_keywords_text_university_text");
+      console.log("Dropped stale text index");
+    } catch (dropErr) {
+      if (dropErr.codeName !== "IndexNotFound") {
+        console.error("Could not drop stale text index:", dropErr.message);
+      }
+    }
     await Promise.all([Document.syncIndexes(), University.syncIndexes(), Discipline.syncIndexes()]);
     console.log("Indexes synced");
   } catch (err) {
