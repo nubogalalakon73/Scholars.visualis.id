@@ -21,8 +21,13 @@ router.get("/", async (req, res, next) => {
     if (language) filter.language = language;
 
     if (q && String(q).trim()) {
-      const text = String(q).trim();
-      const regex = new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
+      const words = String(q)
+        .trim()
+        .split(/\s+/)
+        .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+        .filter(Boolean);
+      const pattern = words.join("|");
+      const regex = new RegExp(pattern, "i");
       filter.$or = [
         { title: regex },
         { authors: regex },
