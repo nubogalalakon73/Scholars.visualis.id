@@ -37,7 +37,7 @@ export default function Home() {
       <Header activePage="home" />
       <main className="container">
         <section className="section" style={{ textAlign: "left" }}>
-          <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)" }}>
+          <h1 style={{ fontSize: "clamp(2.5rem, 7vw, 72pt)", lineHeight: 1.1 }}>
             Temukan <br />
             <span style={{ color: "var(--color-accent-orange-2)" }}>Karya Ilmiah Kampus Indonesia</span>
           </h1>
@@ -94,7 +94,12 @@ export default function Home() {
         {error && <p style={{ color: "crimson" }}>Gagal memuat data: {error}</p>}
 
         <section className="section">
-          <h2>Temukan Berdasarkan Disiplin</h2>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "var(--space-3)" }}>
+            <h2>Temukan Berdasarkan Disiplin</h2>
+            <Link to="/disciplines" style={{ color: "var(--color-accent)", fontWeight: 600, fontSize: "0.9rem" }}>
+              Lihat Semua →
+            </Link>
+          </div>
           <div className="grid grid-5" style={{ gridTemplateColumns: "repeat(5, 1fr)" }}>
             {disciplines.map((d) => {
               const Icon = disciplineIcons[d.id] || CapIcon;
@@ -112,14 +117,19 @@ export default function Home() {
         </section>
 
         <section className="band band-2">
-          <h2>Universitas Terverifikasi</h2>
-          <div className="grid grid-3" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "var(--space-3)" }}>
+            <h2>Universitas Terverifikasi</h2>
+            <Link to="/universities" style={{ color: "var(--color-accent)", fontWeight: 600, fontSize: "0.9rem" }}>
+              Lihat Semua →
+            </Link>
+          </div>
+          <div className="grid grid-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
             {universities.map((u) => (
-              <div key={u.id} className="card">
+              <div key={u.id} className="card" style={{ minWidth: 0 }}>
                 <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "center" }}>
                   <span className="badge-square">{u.abbr}</span>
-                  <div>
-                    <div style={{ fontWeight: 600 }}>{u.name}</div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontWeight: 600, overflowWrap: "break-word" }}>{u.name}</div>
                     <div className="text-muted" style={{ fontSize: "0.85rem" }}>{u.province}</div>
                   </div>
                 </div>

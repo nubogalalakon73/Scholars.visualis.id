@@ -8,6 +8,23 @@ const LANGUAGE_MAP = {
 
 const DOI_REGEX = /10\.\d{4,9}\/[^\s"'<>]+/i;
 
+const HTML_ENTITIES = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+};
+
+function decodeEntities(text) {
+  if (!text) return "";
+  return String(text)
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(parseInt(code, 10)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCharCode(parseInt(code, 16)))
+    .replace(/&([a-z]+);/gi, (m, name) => HTML_ENTITIES[name.toLowerCase()] ?? m);
+}
+
 function stripHtml(text) {
   if (!text) return "";
   return String(text).replace(/<[^>]*>/g, " ");
@@ -19,7 +36,7 @@ function collapseWhitespace(text) {
 }
 
 function cleanText(text) {
-  return collapseWhitespace(stripHtml(text));
+  return collapseWhitespace(decodeEntities(stripHtml(text)));
 }
 
 function normalizeLanguage(rawLangs) {

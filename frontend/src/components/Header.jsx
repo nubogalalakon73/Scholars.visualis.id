@@ -3,8 +3,8 @@ import { SearchIcon } from "./icons.jsx";
 
 const NAV_ITEMS = [
   { key: "discover", label: "Discover", to: "/search" },
-  { key: "university", label: "Universitas", to: "/search" },
-  { key: "discipline", label: "Disiplin Ilmu", to: "/search" },
+  { key: "university", label: "Universitas", to: "/universities" },
+  { key: "discipline", label: "Disiplin Ilmu", to: "/disciplines" },
   { key: "partnership", label: "Kemitraan", to: "/partnership" },
   { key: "about", label: "Tentang", to: "/" },
 ];

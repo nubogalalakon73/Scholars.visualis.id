@@ -2,6 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BookmarkIcon, ExternalLinkIcon } from "./icons.jsx";
 
+function truncate(text, maxLength) {
+  if (!text || text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength).trim()}…`;
+}
+
 export default function DocumentCard({ doc, showAbstract = false }) {
   const [saved, setSaved] = useState(false);
 
@@ -17,7 +22,7 @@ export default function DocumentCard({ doc, showAbstract = false }) {
         {(doc.authors || []).join(", ")}
       </div>
       {doc.repository && <span className="tag">{doc.repository}</span>}
-      {showAbstract && doc.abstract && <p className="text-muted">{doc.abstract}</p>}
+      {showAbstract && doc.abstract && <p className="text-muted">{truncate(doc.abstract, 220)}</p>}
       <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
         {(doc.keywords || []).map((kw) => (
           <span key={kw} className="pill" style={{ fontSize: "0.78rem" }}>
