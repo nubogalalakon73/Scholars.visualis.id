@@ -43,7 +43,7 @@ async function start() {
     console.error("Server will continue running; requests requiring DB will fail until MONGODB_URI is reachable.");
   }
   app.listen(PORT, () => {
-    console.log(`Scholar.visualis.id API listening on port ${PORT}`);
+    console.log(`Scholars.visualis.id API listening on port ${PORT}`);
   });
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "scholar-visualis-backend",
   "version": "1.0.0",
-  "description": "REST API for Scholar.visualis.id academic discovery platform",
+  "description": "REST API for Scholars.visualis.id academic discovery platform",
   "type": "module",
   "main": "server.js",
   "scripts": {

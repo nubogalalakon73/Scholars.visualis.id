@@ -50,7 +50,7 @@ export default function Header({ activePage }) {
             S
           </span>
           <span>
-            <span style={{ display: "block", fontWeight: 700, fontSize: "1.05rem" }}>Scholar.visualis.id</span>
+            <span style={{ display: "block", fontWeight: 700, fontSize: "1.05rem" }}>Scholars.visualis.id</span>
             <span style={{ display: "block", fontSize: "0.72rem", color: "var(--color-neutral-600)" }}>
               Penemuan Karya Ilmiah
             </span>

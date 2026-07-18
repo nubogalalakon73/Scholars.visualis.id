@@ -167,7 +167,7 @@ export default function Home() {
         <section className="band band-1">
           <h2>Integrasi Repository</h2>
           <p className="text-muted" style={{ maxWidth: 560 }}>
-            Institusi Anda mengelola repository sendiri? Hubungkan koleksi Anda ke Scholar.visualis.id dan
+            Institusi Anda mengelola repository sendiri? Hubungkan koleksi Anda ke Scholars.visualis.id dan
             perluas jangkauan riset kampus Anda.
           </p>
           <Link to="/partnership" className="btn btn-primary">

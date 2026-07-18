@@ -85,7 +85,7 @@ export default function UniversityPage() {
         <section className="band band-2">
           <h2>Institusi Anda belum terdaftar?</h2>
           <p className="text-muted" style={{ maxWidth: 560 }}>
-            Hubungkan repository institusi Anda ke Scholar.visualis.id dan perluas jangkauan riset kampus Anda
+            Hubungkan repository institusi Anda ke Scholars.visualis.id dan perluas jangkauan riset kampus Anda
             ke seluruh Indonesia.
           </p>
           <Link to="/partnership" className="btn btn-primary">

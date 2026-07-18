@@ -28,7 +28,7 @@ export default function Footer() {
               >
                 S
               </span>
-              <strong>Scholar.visualis.id</strong>
+              <strong>Scholars.visualis.id</strong>
             </div>
             <p className="text-muted" style={{ maxWidth: 320 }}>
               Platform penemuan karya ilmiah kampus Indonesia — menghubungkan repository universitas dengan
@@ -77,7 +77,7 @@ export default function Footer() {
           }}
         >
           <span className="text-muted" style={{ fontSize: "0.85rem" }}>
-            © {year} Scholar.visualis.id. Seluruh hak cipta dilindungi.
+            © {year} Scholars.visualis.id. Seluruh hak cipta dilindungi.
           </span>
           <div style={{ display: "flex", gap: "var(--space-3)" }}>
             <a href="#" aria-label="Instagram"><InstagramIcon /></a>

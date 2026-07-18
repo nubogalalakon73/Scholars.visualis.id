@@ -1,6 +1,6 @@
-# Scholar.visualis.id
+# Scholars.visualis.id
 
-Scholar.visualis.id is an Indonesian academic research discovery platform: search/browse research
+Scholars.visualis.id is an Indonesian academic research discovery platform: search/browse research
 documents by university, discipline, and degree level, view document detail pages, and cross-sell
 into the external ResearchOS product via segmented CTA banners.
 

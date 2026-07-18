@@ -14,11 +14,11 @@ const STEPS = [
   { title: "Registrasi Metadata", body: "Kami mendaftarkan metadata institusi dan repository Anda ke sistem indeksasi." },
   { title: "Verifikasi Teknis", body: "Tim kami memverifikasi kompatibilitas platform repository Anda." },
   { title: "Sinkronisasi Data", body: "Dokumen dari repository Anda mulai disinkronkan secara berkala." },
-  { title: "Aktif & Terindeks", body: "Koleksi Anda tayang di Scholar.visualis.id dan dapat ditemukan pengguna." },
+  { title: "Aktif & Terindeks", body: "Koleksi Anda tayang di Scholars.visualis.id dan dapat ditemukan pengguna." },
 ];
 
 const FAQS = [
-  { q: "Apakah layanan ini berbayar?", a: "Tidak. Integrasi repository ke Scholar.visualis.id gratis untuk seluruh institusi pendidikan di Indonesia." },
+  { q: "Apakah layanan ini berbayar?", a: "Tidak. Integrasi repository ke Scholars.visualis.id gratis untuk seluruh institusi pendidikan di Indonesia." },
   { q: "Platform repository apa saja yang didukung?", a: "Kami mendukung DSpace, EPrints, OJS, dan platform lain melalui protokol OAI-PMH atau ekspor manual." },
   { q: "Berapa lama proses integrasi?", a: "Rata-rata proses verifikasi dan sinkronisasi awal memakan waktu 5–10 hari kerja." },
 ];
@@ -73,7 +73,7 @@ export default function Partnership() {
     <>
       <Header activePage="partnership" />
       <main className="container section">
-        <h1>Jadikan Repository Anda Bagian dari Scholar.visualis.id</h1>
+        <h1>Jadikan Repository Anda Bagian dari Scholars.visualis.id</h1>
         <p className="text-muted" style={{ maxWidth: 640 }}>
           Bergabunglah sebagai mitra repository dan hubungkan koleksi karya ilmiah institusi Anda ke ekosistem
           pencarian nasional.
@@ -136,7 +136,7 @@ export default function Partnership() {
             {submitted ? (
               <p>
                 Repository berhasil diajukan. Tim Scholar akan menghubungi {form.institution} melalui
-                scholar@visualis.id.
+                scholars@visualis.id.
               </p>
             ) : (
               <>
