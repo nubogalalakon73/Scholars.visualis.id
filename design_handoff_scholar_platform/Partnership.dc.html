@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kemitraan Repository — Scholar.visualis.id</title>
+  <link rel="stylesheet" href="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/styles.css">
+  <script src="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <style>
+    :root { --font-heading: "Inter", system-ui, sans-serif !important; --font-body: "Inter", system-ui, sans-serif !important; }
+    .btn { border-radius: 8px; }
+    .card { border-radius: 8px; background: var(--color-neutral-100); box-shadow: var(--shadow-sm); }
+    .tag { white-space: nowrap; flex-shrink: 0; }
+  </style>
+</helmet>
+<dc-import name="Header" active-page="partnership" hint-size="100%,72px"></dc-import>
+<main style="max-width:960px;margin:0 auto;padding:0 clamp(20px,5vw,64px) calc(var(--space-8)*1.4)">
+
+  <section style="padding:calc(var(--space-8)*1.2) 0 var(--space-6);max-width:680px">
+    <h1 style="font-size: clamp(34px,4.4vw,48px); line-height: 1.12; margin: 0 0 var(--space-3); color: var(--color-accent-900); font-weight: 700">Integrasikan Repository Kampus Anda</h1>
+    <p style="font-size: 17px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 75%, transparent); margin: 0 0 var(--space-6); margin-bottom: 10px">Bantu penelitian institusi Anda lebih mudah ditemukan oleh mahasiswa, dosen, peneliti, dan masyarakat.</p>
+    <div style="display:flex;gap:var(--space-3);flex-wrap:wrap">
+      <button type="button" class="btn btn-primary" onclick="{{ onScrollToWizard }}">Ajukan Integrasi</button>
+      <a href="mailto:scholar@visualis.id" class="btn btn-secondary">Hubungi Kami</a>
+    </div>
+  </section>
+
+  <section style="padding: var(--space-6); border-radius: 12px; background: color-mix(in srgb, black 3%, var(--color-bg)); padding-top: 50px">
+    <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-4)">Manfaat Bergabung</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-4)">
+      <div class="card" style="box-shadow: 0px 1px 20px 0px #E9E9E9"><div class="card-title">Jangkauan Lebih Luas</div><p class="card-body">Metadata riset institusi tampil di hasil pencarian nasional dan disiplin terkait.</p></div>
+      <div class="card" style="box-shadow: 0px 1px 20px 0px #E9E9E9"><div class="card-title">Analitik Penggunaan</div><p class="card-body">Pantau kunjungan, pencarian, dan dokumen paling banyak diakses lewat dashboard mitra.</p></div>
+      <div class="card" style="box-shadow: 0px 1px 20px 0px #E9E9E9"><div class="card-title">Metadata Berkualitas Tinggi</div><p class="card-body">Sinkronisasi otomatis menjaga metadata tetap konsisten dan terverifikasi.</p></div>
+      <div class="card" style="box-shadow: 0px 1px 20px 0px #E9E9E9"><div class="card-title">Dukungan Penuh</div><p class="card-body">Tim Scholar mendampingi proses integrasi dari awal hingga live di direktori.</p></div>
+    </div>
+  </section>
+
+  <section style="padding: var(--space-6) 0; margin-top: 30px">
+    <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-4)">Alur Integrasi</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4)">
+      <div><div style="font-family:var(--font-heading);font-weight:600;font-size:22px;color:var(--color-accent)">01</div><div style="font-size:14px;margin-top:6px">Ajukan repository &amp; kontak verifikasi</div></div>
+      <div><div style="font-family:var(--font-heading);font-weight:600;font-size:22px;color:var(--color-accent)">02</div><div style="font-size:14px;margin-top:6px">Tim Scholar memverifikasi platform</div></div>
+      <div><div style="font-family:var(--font-heading);font-weight:600;font-size:22px;color:var(--color-accent)">03</div><div style="font-size:14px;margin-top:6px">Sinkronisasi metadata otomatis</div></div>
+      <div><div style="font-family:var(--font-heading);font-weight:600;font-size:22px;color:var(--color-accent)">04</div><div style="font-size:14px;margin-top:6px">Repository live di direktori</div></div>
+    </div>
+  </section>
+
+  <section style="padding: var(--space-6) 0; margin-top: 30px">
+    <dc-import name="CtaBanner" variant="aff" hint-size="100%,200px"></dc-import>
+  </section>
+
+  <section style="padding: var(--space-6); border-radius: 12px; background-color: var(--color-bg)">
+    <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-4)">Pertanyaan Umum</div>
+    <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+      <details><summary style="cursor:pointer;font-family:var(--font-heading);font-weight:600;padding:var(--space-2) 0">Platform repository apa saja yang didukung?</summary><p style="font-size:14px;color:color-mix(in srgb, var(--color-text) 75%, transparent);margin:0 0 var(--space-3)">DSpace, EPrints, OJS, dan platform lain melalui konektor kustom.</p></details>
+      <details><summary style="cursor:pointer;font-family:var(--font-heading);font-weight:600;padding:var(--space-2) 0">Berapa lama proses verifikasi?</summary><p style="font-size:14px;color:color-mix(in srgb, var(--color-text) 75%, transparent);margin:0 0 var(--space-3)">Rata-rata 3–5 hari kerja setelah pengajuan diterima.</p></details>
+      <details><summary style="cursor:pointer;font-family:var(--font-heading);font-weight:600;padding:var(--space-2) 0">Apakah integrasi berbayar?</summary><p style="font-size:14px;color:color-mix(in srgb, var(--color-text) 75%, transparent);margin:0 0 var(--space-3)">Integrasi dasar gratis untuk seluruh institusi pendidikan di Indonesia.</p></details>
+    </div>
+  </section>
+
+  <section id="wizard" style="padding:calc(var(--space-8)*0.8) 0 calc(var(--space-8)*1.2);margin-top:var(--space-6)">
+    <h2 style="font-size:26px;margin:0 0 var(--space-6)">Ajukan Repository</h2>
+
+    <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:var(--space-3);max-width:440px">
+        <div class="card-kicker">Langkah 1 dari 4 · Institusi</div>
+        <div class="field"><label>Nama Institusi</label><input class="input" type="text" value="{{ institution }}" oninput="{{ onInstitutionChange }}" placeholder="cth. Universitas Contoh"></div>
+        <button type="button" class="btn btn-primary" disabled="{{ step1Disabled }}" onclick="{{ onNext }}">Lanjutkan</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:var(--space-3);max-width:440px">
+        <div class="card-kicker">Langkah 2 dari 4 · Repository</div>
+        <div class="field"><label>URL Repository</label><input class="input" type="text" value="{{ repoUrl }}" oninput="{{ onRepoUrlChange }}" placeholder="https://repository.kampus.ac.id"></div>
+        <div style="display:flex;gap:var(--space-2)">
+          <button type="button" class="btn btn-secondary" onclick="{{ onBack }}">Kembali</button>
+          <button type="button" class="btn btn-primary" disabled="{{ step2Disabled }}" onclick="{{ onNext }}">Lanjutkan</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:var(--space-3);max-width:440px">
+        <div class="card-kicker">Langkah 3 dari 4 · Platform</div>
+        <div class="seg">
+          <sc-for list="{{ platformOptions }}" as="p" hint-placeholder-count="4">
+            <label class="seg-opt"><input type="radio" name="platform" checked="{{ p.checked }}" onchange="{{ p.onSelect }}">{{ p.label }}</label>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button type="button" class="btn btn-secondary" onclick="{{ onBack }}">Kembali</button>
+          <button type="button" class="btn btn-primary" onclick="{{ onNext }}">Lanjutkan</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:var(--space-3);max-width:440px">
+        <div class="card-kicker">Langkah 4 dari 4 · Kontak Verifikasi</div>
+        <div class="field"><label>Nama</label><input class="input" type="text" value="{{ contactName }}" oninput="{{ onContactNameChange }}"></div>
+        <div class="field"><label>Email</label><input class="input" type="email" value="{{ contactEmail }}" oninput="{{ onContactEmailChange }}"></div>
+        <div class="field"><label>Telepon</label><input class="input" type="text" value="{{ contactPhone }}" oninput="{{ onContactPhoneChange }}"></div>
+        <div style="display:flex;gap:var(--space-2)">
+          <button type="button" class="btn btn-secondary" onclick="{{ onBack }}">Kembali</button>
+          <button type="button" class="btn btn-primary" disabled="{{ step4Disabled }}" onclick="{{ onSubmitWizard }}">Ajukan Repository</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+      <div class="card elev-md" style="max-width:480px;gap:var(--space-2)">
+        <div class="card-title">Repository berhasil diajukan.</div>
+        <p class="card-body">Tim Scholar akan menghubungi {{ institution }} melalui scholar@visualis.id.</p>
+      </div>
+    </sc-if>
+  </section>
+
+</main>
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { step: 1, institution: "", repoUrl: "", platform: "DSpace", contactName: "", contactEmail: "", contactPhone: "" };
+  renderVals() {
+    const s = this.state;
+    return {
+      isStep1: s.step === 1, isStep2: s.step === 2, isStep3: s.step === 3, isStep4: s.step === 4, isDone: s.step === 5,
+      institution: s.institution, onInstitutionChange: (e) => this.setState({ institution: e.target.value }),
+      repoUrl: s.repoUrl, onRepoUrlChange: (e) => this.setState({ repoUrl: e.target.value }),
+      contactName: s.contactName, onContactNameChange: (e) => this.setState({ contactName: e.target.value }),
+      contactEmail: s.contactEmail, onContactEmailChange: (e) => this.setState({ contactEmail: e.target.value }),
+      contactPhone: s.contactPhone, onContactPhoneChange: (e) => this.setState({ contactPhone: e.target.value }),
+      platformOptions: ["DSpace", "EPrints", "OJS", "Lainnya"].map(p => ({ label: p, checked: s.platform === p, onSelect: () => this.setState({ platform: p }) })),
+      step1Disabled: !s.institution.trim(),
+      step2Disabled: !s.repoUrl.trim(),
+      step4Disabled: !s.contactName.trim() || !s.contactEmail.trim(),
+      onNext: () => this.setState(st => ({ step: st.step + 1 })),
+      onBack: () => this.setState(st => ({ step: st.step - 1 })),
+      onSubmitWizard: () => this.setState({ step: 5 }),
+      onScrollToWizard: () => { const el = document.getElementById("wizard"); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 20, behavior: "smooth" }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

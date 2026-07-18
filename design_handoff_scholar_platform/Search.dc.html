@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cari Penelitian — Scholar.visualis.id</title>
+  <link rel="stylesheet" href="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/styles.css">
+  <script src="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <style>
+    :root { --font-heading: "Inter", system-ui, sans-serif !important; --font-body: "Inter", system-ui, sans-serif !important; }
+    .btn { border-radius: 8px; }
+    .card { border-radius: 8px; background: var(--color-neutral-100); box-shadow: var(--shadow-sm); }
+    .tag { white-space: nowrap; flex-shrink: 0; }
+  </style>
+</helmet>
+<dc-import name="Header" active-page="discover" hint-size="100%,72px"></dc-import>
+<main style="max-width:1280px;margin:0 auto;padding:var(--space-6) clamp(20px,5vw,64px) calc(var(--space-8)*1.4);display:grid;grid-template-columns:230px 1fr 280px;gap:var(--space-6);align-items:start">
+
+  <aside style="display:flex;flex-direction:column;gap:var(--space-6);position:sticky;top:var(--space-4);background:color-mix(in srgb, black 3%, var(--color-bg));border-radius:12px;padding:var(--space-4)">
+    <div class="field">
+      <label>Cari</label>
+      <input class="input" type="text" placeholder="Judul, penulis, kata kunci..." value="{{ query }}" oninput="{{ onQueryChange }}" style="border-radius: 7px; font-size: 12px; background-color: var(--color-neutral-100)">
+    </div>
+    <div class="field">
+      <label>Jenjang</label>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <sc-for list="{{ degreeOptions }}" as="opt" hint-placeholder-count="3">
+          <label class="radio" style="font-size:13px"><input type="checkbox" checked="{{ opt.checked }}" onchange="{{ opt.onToggle }}"><span class="dot" style="border-radius:var(--radius-sm)"></span>{{ opt.label }}</label>
+        </sc-for>
+      </div>
+    </div>
+    <div class="field">
+      <label>Universitas</label>
+      <div style="display:flex;flex-direction:column;gap:6px;max-height:180px;overflow:auto">
+        <sc-for list="{{ uniOptions }}" as="opt" hint-placeholder-count="10">
+          <label class="radio" style="font-size:13px"><input type="checkbox" checked="{{ opt.checked }}" onchange="{{ opt.onToggle }}"><span class="dot" style="border-radius:var(--radius-sm)"></span>{{ opt.label }}</label>
+        </sc-for>
+      </div>
+    </div>
+    <div class="field">
+      <label>Disiplin Ilmu</label>
+      <select class="input" onchange="{{ onDisciplineChange }}" value="{{ discipline }}" style="border-radius: 7px; background-color: var(--color-neutral-100); appearance: base-select">
+        <option value="">Semua Disiplin</option>
+        <sc-for list="{{ disciplineOptions }}" as="opt" hint-placeholder-count="10">
+          <option value="{{ opt.id }}">{{ opt.name }}</option>
+        </sc-for>
+      </select>
+    </div>
+    <div class="field">
+      <label>Bahasa</label>
+      <select class="input" onchange="{{ onLanguageChange }}" value="{{ language }}" style="border-radius: 7px; background-color: var(--color-neutral-100); appearance: base-select">
+        <option value="">Semua Bahasa</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Inggris">Inggris</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-secondary btn-block" onclick="{{ onReset }}" style="background-color: var(--color-accent); color: var(--color-neutral-100)">Reset Filter</button>
+  </aside>
+
+  <section>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-4);flex-wrap:wrap;gap:var(--space-3)">
+      <div style="font-size:14px;color:color-mix(in srgb, var(--color-text) 65%, transparent)"><strong style="color:var(--color-text)">{{ resultCount }}</strong> hasil ditemukan · {{ searchTime }} detik</div>
+      <div style="display:flex;align-items:center;gap:var(--space-3)">
+        <select class="input" style="width: auto; min-height: 32px; font-size: 13px; border-radius: 7px" onchange="{{ onSortChange }}" value="{{ sort }}">
+          <option value="relevance">Relevansi</option>
+          <option value="newest">Tahun Terbaru</option>
+          <option value="oldest">Tahun Terlama</option>
+        </select>
+        <div class="seg">
+          <label class="seg-opt"><input type="radio" name="view" checked="{{ isListView }}" onchange="{{ onViewList }}">List</label>
+          <label class="seg-opt"><input type="radio" name="view" checked="{{ isGridView }}" onchange="{{ onViewGrid }}">Grid</label>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ resultsContainerStyle }}">
+      <sc-for list="{{ resultsFirst }}" as="doc" hint-placeholder-count="2">
+        <article class="card elev-sm" style="gap: var(--space-3); box-shadow: 0px 0px 20px 0px #EBEAEA">
+          <div class="card-kicker">{{ doc.faculty }} · {{ doc.university }} · {{ doc.year }} · {{ doc.degree }} · {{ doc.language }}</div>
+          <div class="card-title" style="font-size:18px">{{ doc.title }}</div>
+          <div style="font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent)">{{ doc.authorsStr }}</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="tag tag-accent-2" style="background-color: #FEEEE6">{{ doc.repository }}</span>
+          </div>
+          <p class="card-body" style="font-size:14px">{{ doc.abstract }}</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ doc.keywords }}" as="kw" hint-placeholder-count="3">
+              <span class="tag tag-neutral">{{ kw }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:var(--space-2);margin-top:var(--space-1);align-items:center">
+            <a href="{{ doc.detailHref }}" class="btn btn-secondary" style="background-color: var(--color-neutral-100)">Lihat Detail</a>
+            <button type="button" class="btn btn-ghost" onclick="{{ doc.onToggleSave }}">{{ doc.saveLabel }}</button>
+            <a href="https://risethibrida.com" target="_blank" rel="noopener" class="btn btn-ghost">ResearchOS</a>
+          </div>
+        </article>
+      </sc-for>
+      <dc-import name="CtaBanner" variant="s2" hint-size="100%,200px"></dc-import>
+      <sc-for list="{{ resultsRest }}" as="doc" hint-placeholder-count="4">
+        <article class="card elev-sm" style="gap:var(--space-3)">
+          <div class="card-kicker">{{ doc.faculty }} · {{ doc.university }} · {{ doc.year }} · {{ doc.degree }} · {{ doc.language }}</div>
+          <div class="card-title" style="font-size:18px">{{ doc.title }}</div>
+          <div style="font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent)">{{ doc.authorsStr }}</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="tag tag-accent-2">{{ doc.repository }}</span>
+          </div>
+          <p class="card-body" style="font-size:14px">{{ doc.abstract }}</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ doc.keywords }}" as="kw" hint-placeholder-count="3">
+              <span class="tag tag-neutral">{{ kw }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:var(--space-2);margin-top:var(--space-1);align-items:center">
+            <a href="{{ doc.detailHref }}" class="btn btn-secondary">Lihat Detail</a>
+            <button type="button" class="btn btn-ghost" onclick="{{ doc.onToggleSave }}">{{ doc.saveLabel }}</button>
+            <a href="https://risethibrida.com" target="_blank" rel="noopener" class="btn btn-ghost">ResearchOS</a>
+          </div>
+        </article>
+      </sc-for>
+      <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:var(--space-8) 0;text-align:center;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Tidak ada dokumen yang cocok dengan filter ini.</div>
+      </sc-if>
+    </div>
+  </section>
+
+  <aside style="position:sticky;top:var(--space-4)">
+    <div class="card elev-md" style="gap:var(--space-3)">
+      <div class="card-kicker">ResearchOS</div>
+      <div class="card-title">Ingin melanjutkan penelitian?</div>
+      <p class="card-body">Analisis penelitian menggunakan Framework iRDR: research gap, literature review, novelty analysis, dan AI research assistant.</p>
+      <a href="https://risethibrida.com" target="_blank" rel="noopener" class="btn btn-primary btn-block">Buka ResearchOS</a>
+    </div>
+  </aside>
+
+</main>
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { data: null, query: "", degrees: [], unis: [], discipline: "", language: "", sort: "relevance", view: "list", saved: {} };
+  async componentDidMount() {
+    const mod = await import("./data.js");
+    const q = new URLSearchParams(location.search).get("q") || "";
+    this.setState({ data: mod, query: q });
+  }
+  toggleDegree(val) { this.setState(s => ({ degrees: s.degrees.includes(val) ? s.degrees.filter(d => d !== val) : [...s.degrees, val] })); }
+  toggleUni(id) { this.setState(s => ({ unis: s.unis.includes(id) ? s.unis.filter(u => u !== id) : [...s.unis, id] })); }
+  toggleSave(id) { this.setState(s => ({ saved: { ...s.saved, [id]: !s.saved[id] } })); }
+  renderVals() {
+    const d = this.state.data;
+    const fmt = (n) => n.toLocaleString("id-ID");
+    const s = this.state;
+    let docs = d ? d.documents.slice() : [];
+    if (d) {
+      if (s.query) {
+        const q = s.query.toLowerCase();
+        docs = docs.filter(doc => (doc.title + " " + doc.authors.join(" ") + " " + doc.keywords.join(" ") + " " + doc.university).toLowerCase().includes(q));
+      }
+      if (s.degrees.length) docs = docs.filter(doc => s.degrees.includes(doc.degree));
+      if (s.unis.length) docs = docs.filter(doc => s.unis.includes(doc.universityId));
+      if (s.discipline) docs = docs.filter(doc => doc.disciplineId === s.discipline);
+      if (s.language) docs = docs.filter(doc => doc.language === s.language);
+      if (s.sort === "newest") docs = docs.slice().sort((a, b) => b.year - a.year);
+      else if (s.sort === "oldest") docs = docs.slice().sort((a, b) => a.year - b.year);
+    }
+    const results = docs.map(doc => ({
+      ...doc,
+      authorsStr: doc.authors.join(", "),
+      detailHref: `./Document.dc.html?id=${doc.id}`,
+      saveLabel: s.saved[doc.id] ? "Tersimpan ✓" : "Simpan",
+      onToggleSave: () => this.toggleSave(doc.id),
+    }));
+    return {
+      query: s.query,
+      onQueryChange: (e) => this.setState({ query: e.target.value }),
+      degreeOptions: ["S1", "S2", "S3"].map(v => ({ label: v, checked: s.degrees.includes(v), onToggle: () => this.toggleDegree(v) })),
+      uniOptions: d ? d.universities.map(u => ({ label: u.name, checked: s.unis.includes(u.id), onToggle: () => this.toggleUni(u.id) })) : [],
+      disciplineOptions: d ? d.disciplines : [],
+      discipline: s.discipline,
+      onDisciplineChange: (e) => this.setState({ discipline: e.target.value }),
+      language: s.language,
+      onLanguageChange: (e) => this.setState({ language: e.target.value }),
+      sort: s.sort,
+      onSortChange: (e) => this.setState({ sort: e.target.value }),
+      isListView: s.view === "list",
+      isGridView: s.view === "grid",
+      onViewList: () => this.setState({ view: "list" }),
+      onViewGrid: () => this.setState({ view: "grid" }),
+      resultsContainerStyle: s.view === "grid" ? "display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-4)" : "display:flex;flex-direction:column;gap:var(--space-4)",
+      results,
+      resultsFirst: results.slice(0, 2),
+      resultsRest: results.slice(2),
+      resultCount: fmt(results.length),
+      noResults: d ? results.length === 0 : false,
+      searchTime: (0.18 + results.length * 0.02).toFixed(2),
+      onReset: () => this.setState({ query: "", degrees: [], unis: [], discipline: "", language: "", sort: "relevance" }),
+    };
+  }
+}
+</script>
+</body>
+</html>

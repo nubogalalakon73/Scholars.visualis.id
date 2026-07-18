@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Disiplin Ilmu — Scholar.visualis.id</title>
+  <link rel="stylesheet" href="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/styles.css">
+  <script src="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <style>
+    :root { --font-heading: "Inter", system-ui, sans-serif !important; --font-body: "Inter", system-ui, sans-serif !important; }
+    .btn { border-radius: 8px; }
+    .card { border-radius: 8px; background: var(--color-neutral-100); box-shadow: var(--shadow-sm); }
+    .tag { white-space: nowrap; flex-shrink: 0; }
+  </style>
+</helmet>
+<dc-import name="Header" active-page="disciplines" hint-size="100%,72px"></dc-import>
+<sc-if value="{{ loaded }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,64px) calc(var(--space-8)*1.4)">
+
+  <section style="padding:calc(var(--space-8)*1.1) 0 var(--space-6)">
+    <div class="card-kicker">Disiplin Ilmu</div>
+    <h1 style="font-size: 38px; margin: 8px 0 var(--space-3); color: var(--color-accent-900); font-weight: 700">{{ disc.name }}</h1>
+    <p style="font-size:16px;max-width:60ch;color:color-mix(in srgb, var(--color-text) 75%, transparent);margin:0">Jelajahi metadata penelitian bidang {{ disc.nameLower }} dari repository universitas di seluruh Indonesia, dan lanjutkan analisis dengan Framework iRDR di ResearchOS.</p>
+  </section>
+
+  <section style="padding: var(--space-6); border-radius: 12px; background: color-mix(in srgb, black 3%, var(--color-bg)); height: 120px; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px">
+    <p style="font-family:var(--font-heading);font-weight:600;font-size:38px;margin:0;color:var(--color-accent)">{{ disc.docCountFmt }}</p>
+    <p style="font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin:6px 0 0">Dokumen terindeks pada disiplin ini</p>
+  </section>
+
+  <section style="padding:var(--space-6) 0;margin-top:var(--space-6)">
+    <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-3)">Topik Populer</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <sc-for list="{{ trendingTopics }}" as="t" hint-placeholder-count="6">
+        <a href="{{ t.href }}" class="tag tag-outline" style="text-decoration: none; border-radius: 3px">{{ t.label }}</a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding: var(--space-6); margin-top: var(--space-6); margin-bottom: 30px; background-color: var(--color-neutral-100)">
+    <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent); margin-bottom: var(--space-3); position: static">Universitas Populer di Bidang Ini</div>
+    <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-4); justify-content: flex-start">
+      <sc-for list="{{ topUniversities }}" as="u" hint-placeholder-count="3">
+        <a href="{{ u.href }}" class="card" style="text-decoration: none; color: inherit; box-shadow: 0px 1px 20px 0px #EDE9E9">
+          <span class="card-title" style="font-size:15px">{{ u.name }}</span>
+          <span class="card-body">{{ u.province }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:var(--space-6) 0 calc(var(--space-8)*1.1);margin-top:var(--space-6)">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
+      <h2 style="font-size:26px;margin:0">Riset Terbaru</h2>
+      <a href="{{ searchHref }}" class="btn btn-ghost">Lihat semua</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+      <sc-for list="{{ documents }}" as="doc" hint-placeholder-count="4">
+        <article class="card elev-sm" style="gap: var(--space-2); box-shadow: 0px 1px 20px 0px #E2DFDF">
+          <div class="card-kicker">{{ doc.university }} · {{ doc.year }} · {{ doc.degree }}</div>
+          <div class="card-title" style="font-size:17px">{{ doc.title }}</div>
+          <div style="font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent)">{{ doc.authorsStr }}</div>
+          <div><a href="{{ doc.detailHref }}" class="btn btn-secondary">Lihat Detail</a></div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:var(--space-6) 0 calc(var(--space-8)*0.6);margin-top:var(--space-6)">
+    <dc-import name="CtaBanner" variant="s2" hint-size="100%,200px"></dc-import>
+  </section>
+
+  <section style="padding: var(--space-6); border-radius: 12px; margin-top: var(--space-6); margin-bottom: calc(var(--space-8)*1.1); text-align: center; background-color: var(--color-accent)">
+    <h2 style="font-size: 24px; margin: 0 0 var(--space-2); color: var(--color-neutral-100); font-weight: 700">Sudah menemukan referensi di bidang {{ disc.nameLower }}?</h2>
+    <p style="font-size: 14px; margin: 0 0 var(--space-3); color: var(--color-neutral-100)">Lanjutkan di ResearchOS untuk membangun penelitian yang lebih terstruktur dan bertanggung jawab.</p>
+    <a href="https://risethibrida.com" target="_blank" rel="noopener" class="btn btn-primary" style="background-color: #F55536">Lanjutkan ke ResearchOS</a>
+  </section>
+
+</main>
+</sc-if>
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { data: null };
+  async componentDidMount() {
+    const mod = await import("./data.js");
+    this.setState({ data: mod });
+  }
+  renderVals() {
+    const d = this.state.data;
+    if (!d) return { loaded: false };
+    const id = new URLSearchParams(location.search).get("id") || d.disciplines[0].id;
+    const raw = d.getDiscipline(id) || d.disciplines[0];
+    const fmt = (n) => n.toLocaleString("id-ID");
+    const disc = { ...raw, docCountFmt: fmt(raw.docCount), nameLower: raw.name.toLowerCase() };
+    const documents = d.documents.filter(doc => doc.disciplineId === disc.id).map(doc => ({ ...doc, authorsStr: doc.authors.join(", "), detailHref: `./Document.dc.html?id=${doc.id}` }));
+    const topics = Array.from(new Set(documents.flatMap(doc => doc.keywords))).slice(0, 6);
+    const uniIds = Array.from(new Set(documents.map(doc => doc.universityId)));
+    const topUniversities = (uniIds.length ? uniIds : d.universities.slice(0, 3).map(u => u.id)).slice(0, 3).map(id2 => {
+      const u = d.getUniversity(id2);
+      return { ...u, href: `./University.dc.html?id=${u.id}` };
+    });
+    return {
+      loaded: true, disc, documents,
+      trendingTopics: topics.map(label => ({ label, href: `./Search.dc.html?q=${encodeURIComponent(label)}` })),
+      topUniversities,
+      searchHref: `./Search.dc.html?q=${encodeURIComponent(disc.name)}`,
+    };
+  }
+}
+</script>
+</body>
+</html>

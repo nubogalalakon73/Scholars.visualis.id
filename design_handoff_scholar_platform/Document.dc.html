@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detail Dokumen — Scholar.visualis.id</title>
+  <link rel="stylesheet" href="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/styles.css">
+  <script src="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <style>
+    :root { --font-heading: "Inter", system-ui, sans-serif !important; --font-body: "Inter", system-ui, sans-serif !important; }
+    .btn { border-radius: 8px; }
+    .card { border-radius: 8px; background: var(--color-neutral-100); box-shadow: var(--shadow-sm); }
+    .tag { white-space: nowrap; flex-shrink: 0; }
+  </style>
+</helmet>
+<dc-import name="Header" active-page="discover" hint-size="100%,72px"></dc-import>
+<sc-if value="{{ loaded }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1280px;margin:0 auto;padding:var(--space-6) clamp(20px,5vw,64px) calc(var(--space-8)*1.4);display:grid;grid-template-columns:230px 1fr 280px;gap:var(--space-6);align-items:start">
+
+  <aside style="display:flex;flex-direction:column;gap:var(--space-3);font-size:14px;background:color-mix(in srgb, black 3%, var(--color-bg));border-radius:12px;padding:var(--space-4)">
+    <div class="card-kicker" style="margin-bottom:4px">Metadata</div>
+    <div><div style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Penulis</div><div>{{ doc.authorsStr }}</div></div>
+    <div><div style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Institusi</div><a href="{{ uniHref }}" style="color:var(--color-accent);text-decoration:none">{{ doc.university }}</a></div>
+    <div><div style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Fakultas</div><div>{{ doc.faculty }}</div></div>
+    <div><div style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Program Studi</div><div>{{ doc.program }}</div></div>
+    <div><div style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Jenjang</div><div>{{ doc.degree }}</div></div>
+    <div><div style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Bahasa</div><div>{{ doc.language }}</div></div>
+    <div><div style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Tahun</div><div>{{ doc.year }}</div></div>
+    <div><div style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Repository</div><span class="tag tag-accent-2">{{ doc.repository }}</span></div>
+    <div><div style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">DOI</div><div style="font-size:13px">{{ doc.doi }}</div></div>
+    <button type="button" class="btn btn-secondary btn-block" onclick="{{ onCopyCitation }}" style="background-color: var(--color-accent); color: var(--color-neutral-100)">{{ citeLabel }}</button>
+  </aside>
+
+  <section>
+    <div class="card-kicker">{{ doc.disciplineName }}</div>
+    <h1 style="font-size:32px;line-height:1.15;margin:8px 0 var(--space-4)">{{ doc.title }}</h1>
+    <h3 style="font-size:15px;margin:0 0 var(--space-2);color:color-mix(in srgb, var(--color-text) 60%, transparent);text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Abstrak</h3>
+    <p style="font-size: 16px; line-height: 1.7; max-width: 70ch; margin: 0 0 var(--space-6); margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px">{{ doc.abstract }}</p>
+    <h3 style="font-size:15px;margin:0 0 var(--space-2);color:color-mix(in srgb, var(--color-text) 60%, transparent);text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Kata Kunci</h3>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:var(--space-6)">
+      <sc-for list="{{ doc.keywords }}" as="kw" hint-placeholder-count="3">
+        <span class="tag tag-neutral" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px">{{ kw }}</span>
+      </sc-for>
+    </div>
+    <div style="display:flex;gap:var(--space-3)">
+      <a href="#repository" class="btn btn-secondary" style="background-color: var(--color-accent-100)">Tautan Repository</a>
+      <a href="#pdf" class="btn btn-secondary">Unduh PDF</a>
+    </div>
+  </section>
+
+  <aside style="display:flex;flex-direction:column;gap:var(--space-6)">
+    <dc-import name="CtaBanner" variant="{{ ctaVariant }}" hint-size="100%,220px"></dc-import>
+    <div class="card elev-md" style="gap: var(--space-2)">
+      <div class="card-kicker">Aksi Penelitian</div>
+      <a href="https://risethibrida.com" target="_blank" rel="noopener" class="btn btn-secondary btn-block">Research Gap</a>
+      <a href="https://risethibrida.com" target="_blank" rel="noopener" class="btn btn-secondary btn-block">Literature Review</a>
+      <a href="https://risethibrida.com" target="_blank" rel="noopener" class="btn btn-secondary btn-block">Novelty Analysis</a>
+      <a href="https://risethibrida.com" target="_blank" rel="noopener" class="btn btn-secondary btn-block">AI Research Assistant</a>
+      <a href="https://risethibrida.com" target="_blank" rel="noopener" class="btn btn-primary btn-block">Lanjutkan Penelitian</a>
+    </div>
+    <div>
+      <div class="card-kicker" style="margin-bottom: var(--space-2); margin-top: 10px">Dokumen Terkait</div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+        <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+          <a href="{{ r.href }}" class="card" style="text-decoration: none; color: inherit; gap: 6px; box-shadow: 0px 0px 20px 0px #E4E4E4">
+            <span class="card-title" style="font-size:14px">{{ r.title }}</span>
+            <span style="font-size:12px;color:color-mix(in srgb, var(--color-text) 60%, transparent)">{{ r.university }} · {{ r.year }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </aside>
+</main>
+</sc-if>
+<sc-if value="{{ notFound }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:640px;margin:0 auto;padding:calc(var(--space-8)*2) clamp(20px,5vw,64px);text-align:center">
+    <h2 style="font-size:24px">Dokumen tidak ditemukan</h2>
+    <a href="./Search.dc.html" class="btn btn-primary">Kembali ke Pencarian</a>
+  </div>
+</sc-if>
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { data: null, copied: false };
+  async componentDidMount() {
+    const mod = await import("./data.js");
+    this.setState({ data: mod });
+  }
+  renderVals() {
+    const d = this.state.data;
+    if (!d) return { loaded: false, notFound: false };
+    const id = new URLSearchParams(location.search).get("id") || d.documents[0].id;
+    const rawDoc = d.getDocument(id);
+    if (!rawDoc) return { loaded: false, notFound: true };
+    const disc = d.getDiscipline(rawDoc.disciplineId);
+    const doc = { ...rawDoc, authorsStr: rawDoc.authors.join(", "), disciplineName: disc ? disc.name : "" };
+    const related = d.relatedDocuments(rawDoc, 3).map(r => ({ ...r, href: `./Document.dc.html?id=${r.id}` }));
+    const citation = `${doc.authorsStr}. (${doc.year}). ${doc.title}. ${doc.university}: ${doc.faculty}. DOI: ${doc.doi}`;
+    const ctaVariant = doc.degree === "S1" ? "s1" : doc.degree === "S2" ? "s2" : "s3";
+    return {
+      loaded: true, notFound: false, doc, related, ctaVariant,
+      uniHref: `./University.dc.html?id=${rawDoc.universityId}`,
+      citeLabel: this.state.copied ? "Sitasi Disalin ✓" : "Salin Sitasi",
+      onCopyCitation: () => { navigator.clipboard?.writeText(citation); this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 1800); },
+    };
+  }
+}
+</script>
+</body>
+</html>

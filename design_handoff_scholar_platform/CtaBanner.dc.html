@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/styles.css">
+  <script src="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    :root { --font-heading: "Inter", system-ui, sans-serif !important; --font-body: "Inter", system-ui, sans-serif !important; }
+    .btn { border-radius: 8px; }
+  </style>
+</helmet>
+<sc-if value="{{ cta }}" hint-placeholder-val="{{ false }}">
+  <div style="padding:var(--space-6);border-radius:12px;background:color-mix(in srgb, black 4%, var(--color-bg));display:flex;flex-direction:column;gap:var(--space-2);height:100%">
+    <span class="tag tag-accent" style="align-self:flex-start">{{ cta.kicker }}</span>
+    <h3 style="font-size:17px;margin:var(--space-1) 0 0;line-height:1.25">{{ cta.title }}</h3>
+    <p style="font-size:13px;line-height:1.5;color:color-mix(in srgb, var(--color-text) 72%, transparent);margin:0;flex:1">{{ cta.body }}</p>
+    <a href="{{ cta.ctaHref }}" target="{{ cta.ctaTarget }}" rel="noopener" class="btn btn-primary" style="align-self:flex-start;margin-top:var(--space-2)">{{ cta.ctaLabel }}</a>
+  </div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:320,&quot;height&quot;:220},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;s1&quot;,&quot;options&quot;:[&quot;s1&quot;,&quot;s2&quot;,&quot;s3&quot;,&quot;aff&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { data: null };
+  async componentDidMount() {
+    const mod = await import("./data.js");
+    this.setState({ data: mod });
+  }
+  renderVals() {
+    const d = this.state.data;
+    if (!d) return { cta: null };
+    return { cta: d.getCTA(this.props.variant || "s1") };
+  }
+}
+</script>
+</body>
+</html>

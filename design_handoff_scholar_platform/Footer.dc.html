@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/styles.css">
+  <script src="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <style>
+    :root { --font-heading: "Inter", system-ui, sans-serif !important; --font-body: "Inter", system-ui, sans-serif !important; }
+    .btn { border-radius: 8px; }
+    .card { border-radius: 8px; background: var(--color-neutral-100); box-shadow: var(--shadow-sm); }
+    .tag { white-space: nowrap; flex-shrink: 0; }
+  </style>
+  <style>
+    a.footer-link { color: color-mix(in srgb, var(--color-text) 70%, transparent); text-decoration: none; }
+    a.footer-link:hover { color: var(--color-accent); }
+  </style>
+</helmet>
+<footer style="padding: calc(var(--space-8) * 1.4) clamp(20px,5vw,64px) var(--space-8); display: flex; flex-direction: column; gap: var(--space-8); background-color: var(--color-accent-700); position: static; justify-content: flex-start; align-items: stretch">
+  <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:var(--space-8)">
+    <div>
+      <div style="font-family: var(--font-heading); font-weight: 700; font-size: 24px; margin-bottom: var(--space-2); color: var(--color-bg)">Scholar.visualis.id</div>
+      <p style="font-size: 14px; max-width: 34ch; color: var(--color-bg); margin: 0">Platform discovery riset akademik Indonesia — menautkan repository kampus dengan analisis lanjutan di ResearchOS.</p>
+    </div>
+    <div>
+      <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-400); margin-bottom: var(--space-2)">Navigasi</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a class="footer-link" href="./Search.dc.html" style="color: var(--color-neutral-300)">Discover</a>
+        <a class="footer-link" href="./University.dc.html?id=ui" style="color: var(--color-neutral-300)">Universitas</a>
+        <a class="footer-link" href="./Discipline.dc.html?id=komputer" style="color: var(--color-neutral-300)">Disiplin Ilmu</a>
+        <a class="footer-link" href="./Partnership.dc.html" style="color: var(--color-neutral-300)">Kemitraan</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-400); margin-bottom: var(--space-2)">Sumber Daya</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a class="footer-link" href="#privacy" style="color: var(--color-neutral-300)">Kebijakan Privasi</a>
+        <a class="footer-link" href="#terms" style="color: var(--color-neutral-300)">Syarat &amp; Ketentuan</a>
+        <a class="footer-link" href="#api" style="color: var(--color-neutral-300)">API</a>
+        <a class="footer-link" href="mailto:scholar@visualis.id" style="color: var(--color-neutral-300)">Kontak</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-400); margin-bottom: var(--space-2)">Lanjutkan Riset</div>
+      <p style="font-size: 13px; margin: 0 0 var(--space-2); color: var(--color-bg)">scholar@visualis.id</p>
+      <a href="https://risethibrida.com" target="_blank" rel="noopener" class="btn btn-primary" style="background-color: #F35B04">Buka ResearchOS
+        <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path></svg>
+      </a>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding-top:var(--space-4);font-size:12px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">
+    <span style="color: var(--color-neutral-300)">© 2026 PT. Semesta Nuboga Lalakon</span>
+    <div style="display:flex;gap:var(--space-3)">
+      <a class="footer-link" href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24ZM96,176a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm-8-80a12,12,0,1,1,12-12A12,12,0,0,1,88,96Zm88,80a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,176,140Z"></path></svg></a>
+      <a class="footer-link" href="#" aria-label="X"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M214.75,211.71l-62.6-98.38,61.77-67.95a8,8,0,0,0-11.84-10.76L143.24,99.34,102.75,35.71A8,8,0,0,0,96,32H48a8,8,0,0,0-6.75,12.3l62.6,98.37-61.77,68a8,8,0,1,0,11.84,10.76l58.84-64.72,40.49,63.63A8,8,0,0,0,160,224h48a8,8,0,0,0,6.75-12.29Z"></path></svg></a>
+      <a class="footer-link" href="mailto:scholar@visualis.id" aria-label="Email"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-96,85.15L52.57,64H203.43ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12.51,11.55a8,8,0,0,0,10.88,0l12.51-11.55L211.43,192H44.57Zm46.74-10.85L216,74.19V181.81Z"></path></svg></a>
+    </div>
+  </div>
+</footer>
+
+</x-dc>
+</body>
+</html>

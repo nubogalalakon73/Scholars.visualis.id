@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profil Universitas — Scholar.visualis.id</title>
+  <link rel="stylesheet" href="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/styles.css">
+  <script src="_ds/broadsheet-3850286b-78f9-4a86-a4ef-2b6d05384152/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <style>
+    :root { --font-heading: "Inter", system-ui, sans-serif !important; --font-body: "Inter", system-ui, sans-serif !important; }
+    .btn { border-radius: 8px; }
+    .card { border-radius: 8px; background: var(--color-neutral-100); box-shadow: var(--shadow-sm); }
+    .tag { white-space: nowrap; flex-shrink: 0; }
+  </style>
+</helmet>
+<dc-import name="Header" active-page="universities" hint-size="100%,72px"></dc-import>
+<sc-if value="{{ loaded }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,64px) calc(var(--space-8)*1.4)">
+
+  <section style="padding:calc(var(--space-8)*1.1) 0 var(--space-6);display:flex;align-items:center;gap:var(--space-6)">
+    <span style="width:88px;height:88px;border-radius:10px;background:var(--color-neutral-800);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-weight:600;font-size:26px;flex:none">{{ u.abbr }}</span>
+    <div style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px">
+      <h1 style="font-size:34px;margin:0 0 6px">{{ u.name }}</h1>
+      <div style="display:flex;align-items:center;gap:var(--space-3);font-size:14px;color:color-mix(in srgb, var(--color-text) 65%, transparent)">
+        <span>{{ u.province }}</span>
+        <span class="tag tag-accent">{{ u.status }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:var(--space-6);border-radius:12px;background:color-mix(in srgb, black 3%, var(--color-bg))">
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-8)">
+      <div>
+        <p style="font-family: var(--font-heading); font-weight: 700; font-size: 38px; margin: 0; color: var(--color-accent)">{{ u.indexedDocsFmt }}</p>
+        <p style="font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent);margin:6px 0 0">Dokumen Terindeks</p>
+      </div>
+      <div>
+        <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 55%, transparent);margin-bottom:var(--space-2)">Fakultas Teratas</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <sc-for list="{{ u.topFaculties }}" as="f" hint-placeholder-count="3">
+            <span class="tag tag-neutral" style="background-color: var(--color-accent-100)">{{ f }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:var(--space-6) 0 calc(var(--space-8)*1.1);margin-top:var(--space-6)">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
+      <h2 style="font-size:26px;margin:0">Riset Terbaru dari {{ u.abbr }}</h2>
+      <a href="{{ searchHref }}" class="btn btn-ghost">Lihat semua</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+      <sc-for list="{{ documents }}" as="doc" hint-placeholder-count="4">
+        <article class="card elev-sm" style="gap: var(--space-2); box-shadow: 0px 0px 20px 0px #E0E0E0">
+          <div class="card-kicker">{{ doc.faculty }} · {{ doc.year }} · {{ doc.degree }}</div>
+          <div class="card-title" style="font-size:17px">{{ doc.title }}</div>
+          <div style="font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent)">{{ doc.authorsStr }}</div>
+          <div><a href="{{ doc.detailHref }}" class="btn btn-secondary">Lihat Detail</a></div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:var(--space-6) 0 calc(var(--space-8)*0.6);margin-top:var(--space-6)">
+    <dc-import name="CtaBanner" variant="s3" hint-size="100%,200px"></dc-import>
+  </section>
+
+  <section style="padding: var(--space-6); border-radius: 12px; margin-top: var(--space-6); margin-bottom: calc(var(--space-8)*1.1); text-align: center; background-color: var(--color-accent)">
+    <h2 style="font-size: 24px; margin: 0 0 var(--space-2); color: var(--color-neutral-100); font-weight: 700">Institusi Anda belum terdaftar?</h2>
+    <p style="font-size:14px;margin:0 0 var(--space-3);color:var(--color-bg)">Ajukan repository kampus agar karya ilmiah institusi Anda terindeks, lebih mudah dicari, dan menjangkau lebih banyak pembaca.</p>
+    <a href="./Partnership.dc.html" class="btn btn-primary" style="background-color: #F55536">Jadi Mitra Repository</a>
+  </section>
+
+</main>
+</sc-if>
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { data: null };
+  async componentDidMount() {
+    const mod = await import("./data.js");
+    this.setState({ data: mod });
+  }
+  renderVals() {
+    const d = this.state.data;
+    if (!d) return { loaded: false };
+    const id = new URLSearchParams(location.search).get("id") || d.universities[0].id;
+    const raw = d.getUniversity(id) || d.universities[0];
+    const fmt = (n) => n.toLocaleString("id-ID");
+    const u = { ...raw, indexedDocsFmt: fmt(raw.indexedDocs) };
+    const documents = d.documents.filter(doc => doc.universityId === u.id).map(doc => ({ ...doc, authorsStr: doc.authors.join(", "), detailHref: `./Document.dc.html?id=${doc.id}` }));
+    return { loaded: true, u, documents, searchHref: `./Search.dc.html?q=${encodeURIComponent(u.name)}` };
+  }
+}
+</script>
+</body>
+</html>
