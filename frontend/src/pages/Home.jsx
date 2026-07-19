@@ -123,7 +123,7 @@ export default function Home() {
               Lihat Semua →
             </Link>
           </div>
-          <div className="grid grid-3" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}>
+          <div className="grid grid-3" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))" }}>
             {universities.map((u) => (
               <div key={u.id} className="card" style={{ minWidth: 0 }}>
                 <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "center" }}>

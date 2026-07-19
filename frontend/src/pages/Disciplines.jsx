@@ -31,7 +31,7 @@ export default function Disciplines() {
 
         <div
           className="grid"
-          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", marginTop: "var(--space-6)" }}
+          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))", marginTop: "var(--space-6)" }}
         >
           {disciplines.map((d) => {
             const Icon = disciplineIcons[d.id] || CapIcon;
