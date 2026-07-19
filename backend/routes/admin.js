@@ -84,6 +84,24 @@ router.get("/repositories", async (req, res) => {
   }
 });
 
+// Updates a repository's config (e.g. fixing a wrong oaiEndpoint) without a redeploy.
+router.patch("/repositories/:repositoryId", async (req, res) => {
+  if (!requireSeedSecret(req, res)) return;
+
+  try {
+    const allowedFields = ["oaiEndpoint", "baseUrl", "metadataPrefix", "setSpec", "enabled", "status"];
+    const update = {};
+    for (const field of allowedFields) {
+      if (req.body[field] !== undefined) update[field] = req.body[field];
+    }
+    const repo = await Repository.findByIdAndUpdate(req.params.repositoryId, { $set: update }, { new: true });
+    if (!repo) return res.status(404).json({ error: "Repository not found" });
+    res.json(repo);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to update repository", detail: err.message });
+  }
+});
+
 // Triggers a manual harvest for a single repository. Responds immediately;
 // the harvest continues in the background.
 router.post("/harvest/:repositoryId", async (req, res) => {
