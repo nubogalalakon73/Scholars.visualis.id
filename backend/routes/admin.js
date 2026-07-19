@@ -10,6 +10,7 @@ import {
   startHarvestAsync,
   runHarvestAllInBackground,
 } from "../services/harvestService.js";
+import { discoverOaiEndpoint } from "../services/endpointDiscovery.js";
 
 const router = express.Router();
 
@@ -99,6 +100,76 @@ router.patch("/repositories/:repositoryId", async (req, res) => {
     res.json(repo);
   } catch (err) {
     res.status(500).json({ error: "Failed to update repository", detail: err.message });
+  }
+});
+
+// Tries a list of common OAI-PMH paths against the repository's baseUrl and
+// updates oaiEndpoint if one responds correctly. Responds immediately;
+// discovery continues in the background (can take a while: several
+// candidate paths, each with its own timeout/retries).
+router.post("/repositories/:repositoryId/discover", async (req, res) => {
+  if (!requireSeedSecret(req, res)) return;
+
+  try {
+    const repository = await Repository.findById(req.params.repositoryId);
+    if (!repository) return res.status(404).json({ error: "Repository not found" });
+
+    res.json({ started: true, repositoryId: repository._id, baseUrl: repository.baseUrl });
+
+    discoverOaiEndpoint(repository.baseUrl)
+      .then(async (result) => {
+        if (result.found) {
+          repository.oaiEndpoint = result.oaiEndpoint;
+          repository.status = "active";
+        } else {
+          repository.status = "error";
+        }
+        await repository.save();
+        console.log(
+          result.found
+            ? `Discovered OAI endpoint for ${repository.name}: ${result.oaiEndpoint}`
+            : `No OAI endpoint found for ${repository.name} after trying ${result.attempts.length} candidates`
+        );
+      })
+      .catch((err) => console.error(`Discovery failed for ${repository.name}:`, err.message));
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Failed to start discovery", detail: err.message });
+    }
+  }
+});
+
+// Runs endpoint discovery for every repository currently marked "error",
+// sequentially in the background. Responds immediately.
+router.post("/repositories/discover-all", async (req, res) => {
+  if (!requireSeedSecret(req, res)) return;
+
+  try {
+    const repos = await Repository.find({ status: "error" });
+    res.json({ started: true, repositoryCount: repos.length });
+
+    (async () => {
+      for (const repository of repos) {
+        try {
+          const result = await discoverOaiEndpoint(repository.baseUrl);
+          if (result.found) {
+            repository.oaiEndpoint = result.oaiEndpoint;
+            repository.status = "active";
+            console.log(`Discovered OAI endpoint for ${repository.name}: ${result.oaiEndpoint}`);
+          } else {
+            console.log(`No OAI endpoint found for ${repository.name}`);
+          }
+          await repository.save();
+        } catch (err) {
+          console.error(`Discovery failed for ${repository.name}:`, err.message);
+        }
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+    })().catch((err) => console.error("Discover-all background error:", err));
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Failed to start discover-all", detail: err.message });
+    }
   }
 });
 
