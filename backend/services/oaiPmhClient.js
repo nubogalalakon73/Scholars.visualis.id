@@ -50,7 +50,13 @@ async function fetchWithRetry(url, attempt = 0) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   try {
-    const res = await fetch(url, { signal: controller.signal });
+    const res = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        "User-Agent": "ScholarsVisualisIdHarvester/1.0 (+https://scholars.visualis.id; metadata harvesting bot)",
+        Accept: "text/xml, application/xml, */*",
+      },
+    });
     if (!res.ok) {
       throw new Error(`HTTP ${res.status} ${res.statusText} for ${url}`);
     }
