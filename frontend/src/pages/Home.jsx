@@ -48,7 +48,7 @@ export default function Home() {
 
           <form
             onSubmit={handleSearch}
-            className="card"
+            className="card hero-search-form"
             style={{ display: "flex", gap: "var(--space-3)", maxWidth: 640, marginTop: "var(--space-6)" }}
           >
             <input
@@ -58,6 +58,7 @@ export default function Home() {
               onChange={(e) => setQ(e.target.value)}
               style={{
                 flexGrow: 1,
+                minWidth: 0,
                 border: "1px solid var(--color-neutral-300)",
                 borderRadius: "var(--radius-sm)",
                 padding: "12px 14px",

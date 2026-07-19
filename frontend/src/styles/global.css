@@ -268,6 +268,13 @@ button {
     grid-template-columns: 1fr !important;
   }
 
+  .hero-search-form {
+    flex-direction: column;
+  }
+  .hero-search-form button {
+    width: 100%;
+  }
+
   h1 {
     font-size: clamp(1.8rem, 9vw, 2.4rem) !important;
   }
