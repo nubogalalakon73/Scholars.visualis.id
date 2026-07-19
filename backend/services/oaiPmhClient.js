@@ -187,7 +187,17 @@ export async function listRecords(baseUrl, options = {}) {
         };
 
     const url = buildUrl(baseUrl, params);
-    const xmlText = await fetchWithRetry(url);
+    let xmlText;
+    try {
+      xmlText = await fetchWithRetry(url);
+    } catch (err) {
+      // A page beyond the first failing (e.g. a server-side bug in the
+      // repository's resumptionToken handling) shouldn't discard every
+      // record already harvested from earlier pages — keep what we have.
+      if (page === 1) throw err;
+      warnings.push(`Stopped pagination at page ${page}: ${err.message}`);
+      break;
+    }
 
     let parsed;
     try {
@@ -205,7 +215,9 @@ export async function listRecords(baseUrl, options = {}) {
       if (code === "noRecordsMatch") {
         break;
       }
-      throw new Error(`OAI-PMH error (${code}): ${message}`);
+      if (page === 1) throw new Error(`OAI-PMH error (${code}): ${message}`);
+      warnings.push(`Stopped pagination at page ${page}: OAI-PMH error (${code}): ${message}`);
+      break;
     }
 
     const listRecordsNode = oaiRoot?.ListRecords;
