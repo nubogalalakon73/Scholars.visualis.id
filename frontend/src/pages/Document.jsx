@@ -62,8 +62,8 @@ export default function DocumentPage() {
       <Header activePage="discover" />
       <main className="container section">
         <div
+          className="layout-3col"
           style={{
-            display: "grid",
             gridTemplateColumns: "280px 1fr 320px",
             gap: "var(--space-6)",
             alignItems: "start",

@@ -30,7 +30,7 @@ export default function Universities() {
 
         <div
           className="grid grid-3"
-          style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", marginTop: "var(--space-6)" }}
+          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", marginTop: "var(--space-6)" }}
         >
           {universities.map((u) => (
             <div key={u.id} className="card" style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>

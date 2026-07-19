@@ -78,8 +78,8 @@ export default function Search() {
       <main className="container section">
         {error && <p style={{ color: "crimson" }}>Gagal memuat data: {error}</p>}
         <div
+          className="layout-3col"
           style={{
-            display: "grid",
             gridTemplateColumns: "230px 1fr 280px",
             gap: "var(--space-6)",
             alignItems: "start",
